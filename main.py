@@ -3,12 +3,21 @@ import pickle
 import pandas as pd
 import requests
 import time
+import gdown
+import os
+
+# Download pkl files from Google Drive if not present
+if not os.path.exists('movies.pkl'):
+    gdown.download('https://drive.google.com/uc?id=1m5L--sfbYyxBYmhPEa3K26dJbU5D-jSo', 'movies.pkl', quiet=False)
+
+if not os.path.exists('similarity_compressed.pkl'):
+    gdown.download('https://drive.google.com/uc?id=1cI0fAwV2YVm6qlg6JtJXrvTe8TCXGjA1', 'similarity_compressed.pkl', quiet=False)
 
 session = requests.Session()
 session.headers.update({'User-Agent': 'Mozilla/5.0'})
 
 def fetch_poster(movie_id):
-    for attempt in range(3):  # 3 baar try karega
+    for attempt in range(3):
         try:
             response = session.get(
                 'https://api.themoviedb.org/3/movie/{}?api_key=adeb800e6df23bd435913e9a1d4100dc&language=en-US'.format(movie_id),

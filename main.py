@@ -8,10 +8,8 @@ import os
 
 # Download pkl files from Google Drive if not present
 
-if os.path.exists('movies.pkl'):
-    os.remove('movies.pkl')
-
-gdown.download('https://drive.google.com/uc?id=1m5L--sfbYyxBYmhPEa3K26dJbU5D-jSo', 'movies.pkl', quiet=False)
+gdown.download('https://drive.google.com/uc?id=1m5L--sfbYyxBYmhPEa3K26dJbU5D-jSo', 'movies.pkl', quiet=False, fuzzy=True)
+gdown.download('https://drive.google.com/uc?id=1cI0fAwV2YVm6qlg6JtJXrvTe8TCXGjA1', 'similarity_compressed.pkl', quiet=False, fuzzy=True)
 
 movies = pd.DataFrame(pickle.load(open('movies.pkl', 'rb')))
 session = requests.Session()

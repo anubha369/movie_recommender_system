@@ -6,12 +6,13 @@ import time
 import gdown
 import os
 
-# Download pkl files from Google Drive if not present
-
-gdown.download('https://drive.google.com/uc?id=1m5L--sfbYyxBYmhPEa3K26dJbU5D-jSo', 'movies.pkl', quiet=False, fuzzy=True)
-gdown.download('https://drive.google.com/uc?id=1cI0fAwV2YVm6qlg6JtJXrvTe8TCXGjA1', 'similarity_compressed.pkl', quiet=False, fuzzy=True)
+# Download pkl files from Google Drive
+gdown.download('https://drive.google.com/uc?id=1m5L--sfbYyxBYmhPEa3K26dJbU5D-jSo', 'movies.pkl', quiet=False)
+gdown.download('https://drive.google.com/uc?id=1cI0fAwV2YVm6qlg6JtJXrvTe8TCXGjA1', 'similarity_compressed.pkl', quiet=False)
 
 movies = pd.DataFrame(pickle.load(open('movies.pkl', 'rb')))
+similarity = pickle.load(open('similarity_compressed.pkl', 'rb'))
+
 session = requests.Session()
 session.headers.update({'User-Agent': 'Mozilla/5.0'})
 
@@ -45,9 +46,6 @@ def recommend(movie):
         time.sleep(1)
 
     return recommended_movies, recommended_movies_posters
-movies = pd.DataFrame(pickle.load(open('movies.pkl', 'rb')))
-
-similarity = pickle.load(open('similarity_compressed.pkl', 'rb'))
 
 st.title('🎬 Movie Recommender System')
 
@@ -72,8 +70,3 @@ if st.button('Recommend'):
     with col5:
         st.text(name[4])
         st.image(poster[4])
-
-        # Ye hai abhi
-        movies = pickle.load(open('movies.pkl', 'rb'))
-
-        # Ye karo

@@ -1,11 +1,12 @@
 import streamlit as st
 import pickle
+import numpy as np
 import pandas as pd
 import requests
 import time
 
-movies = pickle.load(open('movies.pkl', 'rb'))
-similarity = pickle.load(open('similarity_compressed.pkl', 'rb'))
+movies = pickle.load(open('movies_small.pkl', 'rb'))
+similarity = np.load('similarity.npz')['similarity']
 
 session = requests.Session()
 session.headers.update({'User-Agent': 'Mozilla/5.0'})

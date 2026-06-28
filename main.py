@@ -3,27 +3,6 @@ import pickle
 import pandas as pd
 import requests
 import time
-import os
-
-def download_file_from_google_drive(file_id, dest_path):
-    URL = "https://docs.google.com/uc?export=download"
-    session = requests.Session()
-    response = session.get(URL, params={'id': file_id}, stream=True)
-    token = None
-    for key, value in response.cookies.items():
-        if key.startswith('download_warning') or 'confirm' in key.lower():
-            token = value
-    if token:
-        response = session.get(URL, params={'id': file_id, 'confirm': token}, stream=True)
-    else:
-        response = session.get(URL, params={'id': file_id, 'confirm': 't'}, stream=True)
-    with open(dest_path, 'wb') as f:
-        for chunk in response.iter_content(32768):
-            if chunk:
-                f.write(chunk)
-
-download_file_from_google_drive('1m5L--sfbYyxBYmhPEa3K26dJbU5D-jSo', 'movies.pkl')
-download_file_from_google_drive('1cI0fAwV2YVm6qlg6JtJXrvTe8TCXGjA1', 'similarity_compressed.pkl')
 
 movies = pickle.load(open('movies.pkl', 'rb'))
 similarity = pickle.load(open('similarity_compressed.pkl', 'rb'))

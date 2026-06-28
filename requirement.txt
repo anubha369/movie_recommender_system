@@ -43,4 +43,4 @@ streamlit
 requests
 pandas
 scikit-learn
-gdowngdown
+gdown>=4.7.1

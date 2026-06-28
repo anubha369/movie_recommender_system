@@ -46,8 +46,8 @@ def recommend(movie):
         time.sleep(1)
 
     return recommended_movies, recommended_movies_posters
+movies = pd.DataFrame(pickle.load(open('movies.pkl', 'rb')))
 
-movies = pickle.load(open('movies.pkl', 'rb'))
 similarity = pickle.load(open('similarity_compressed.pkl', 'rb'))
 
 st.title('🎬 Movie Recommender System')
@@ -78,4 +78,3 @@ if st.button('Recommend'):
         movies = pickle.load(open('movies.pkl', 'rb'))
 
         # Ye karo
-        movies = pd.DataFrame(pickle.load(open('movies.pkl', 'rb')))

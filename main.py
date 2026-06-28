@@ -73,3 +73,9 @@ if st.button('Recommend'):
     with col5:
         st.text(name[4])
         st.image(poster[4])
+
+        # Ye hai abhi
+        movies = pickle.load(open('movies.pkl', 'rb'))
+
+        # Ye karo
+        movies = pd.DataFrame(pickle.load(open('movies.pkl', 'rb')))
